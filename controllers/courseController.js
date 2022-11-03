@@ -2,6 +2,7 @@ const asyncHandler = require("express-async-handler");
 const con = require("../db/connection")
 const mysql = require("mysql")
 
+
 //get list of all courses
 const getCourse = asyncHandler(async (req,res) =>{
         con.query("select * from course",(error,result)=>{
@@ -22,7 +23,6 @@ const getCourse = asyncHandler(async (req,res) =>{
 //update a particular course
 const updateCourse = asyncHandler(async (req,res) =>{
     const {id, cname , module} = req.body;
-    console.log(id + " "+ cname + " " + module);
     // if( !cname || !module){
     //     res.status(400)
     //     res.json({message:"Empty data, please add again"})

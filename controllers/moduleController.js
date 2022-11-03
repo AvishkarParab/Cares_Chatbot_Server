@@ -2,6 +2,8 @@ const asyncHandler = require("express-async-handler");
 const con = require("../db/connection")
 const mysql = require("mysql")
 
+
+
 //get list of all courses
 const getModule = asyncHandler(async (req,res) =>{
     let selectQuery = "SELECT * FROM module WHERE ?? = ?";
@@ -22,8 +24,8 @@ const getModule = asyncHandler(async (req,res) =>{
 })
 //add a new course
 const addModule = asyncHandler(async (req,res) =>{
-    var {cid,mtype,vidlink,image,quest,opt1,opt2,opt3,opt4,coropt} = req.body;
-
+    var {cid,mtype,vidlink,imagelink,quest,opt1,opt2,opt3,opt4,coropt,file,filename} = req.body;
+    
     if( !mtype || !quest || !coropt){
         res.status(400)
         res.json({message:"Empty data, please add again"})
@@ -31,7 +33,7 @@ const addModule = asyncHandler(async (req,res) =>{
 
     let insertQuery = "INSERT INTO module(??,??,??,??,??,??,??,??,??,??) VALUES(?,?,?,?,?,?,?,?,?,?)";
     let query = mysql.format(insertQuery,["cid","mtype","videolink","image","question","option1","option2","option3","option4","correctopt",
-    cid,mtype,vidlink,image,quest,opt1,opt2,opt3,opt4,coropt]);
+    cid,mtype,vidlink,imagelink,quest,opt1,opt2,opt3,opt4,coropt]);
     
     con.query(query,(error,result)=>{
         if(error){
